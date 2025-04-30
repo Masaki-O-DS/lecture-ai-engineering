@@ -14,6 +14,7 @@ def display_chat_page(pipe):
     user_question = st.text_area("質問", key="question_input", height=100, value=st.session_state.get("current_question", ""))
     submit_button = st.button("質問を送信")
 
+
     # セッション状態の初期化（安全のため）
     if "current_question" not in st.session_state:
         st.session_state.current_question = ""
@@ -26,9 +27,11 @@ def display_chat_page(pipe):
 
     # 質問が送信された場合
     if submit_button and user_question:
+        
         st.session_state.current_question = user_question
         st.session_state.current_answer = "" # 回答をリセット
         st.session_state.feedback_given = False # フィードバック状態もリセット
+        st.balloons()
 
         with st.spinner("モデルが回答を生成中..."):
             answer, response_time = generate_response(pipe, user_question)
